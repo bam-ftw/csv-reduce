@@ -3,25 +3,11 @@ const readline = require('readline')
 const fs = require('fs')
 const config = require('./config')
 
-if (typeof config.in !== 'string') {
-	console.error('missing input file (--in)')
-	process.exit(1)
-}
-
-if (typeof config.fields !== 'string') {
-	console.error('missing fields (--fields)')
-	process.exit(1)
-}
-
-const pathInput = config.i
-const pathOutput = config.o
-const fields = config.f.split(',')
-
 const lineReader = readline.createInterface({
-  input: fs.createReadStream(pathInput)
+  input: fs.createReadStream(config.i)
 })
 
-const writeStream = pathOutput ? fs.createWriteStream(pathOutput) : process.stdout
+const writeStream = config.o ? fs.createWriteStream(config.o) : process.stdout
 
 let indexes = null
 let lineNum = 0
@@ -29,7 +15,7 @@ let lineNum = 0
 lineReader.on('line', line => {
 	if (indexes === null) {
 		const header = line.toString().split(',')
-		indexes = fields.map(el => header.indexOf(el)).filter(el => el != -1)
+		indexes = config.f.split(',').map(el => header.indexOf(el)).filter(el => el != -1)
 		const headerFiltered = indexes.map(idx => header[idx])
 		const newHeaderLine = headerFiltered.join(',')
 

@@ -2,27 +2,28 @@ module.exports = require('yargs')
 .option({
 	// DB
 	'in': {
-		default: '',
 		describe: '',
 		type: 'string',
-		alias: 'i'
+		alias: 'i',
+		demandOption: true,
 	},
 	'out': {
-		default: 'path to input file',
 		describe: 'path to output file, if not given data will be sent to stdout',
 		type: 'string',
-		alias: 'o'
+		alias: 'o',
+		demandOption: false
 	},
 	'fields': {
-		default: '',
 		describe: 'comma separated list of fields from the input file that should be extracted',
 		type: 'string',
-		alias: 'f'
+		alias: 'f',
+		demandOption: true,
 	},
 	'verbose': {
-		default: '',
+		default: false,
 		describe: 'comma separated list of fields that should be extracted from input file',
-		type: 'string',
-		alias: 'v'
+		type: 'boolean',
+		alias: 'v',
+		demandOption: false,
 	},
 }).argv
