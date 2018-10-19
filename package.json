@@ -1,6 +1,6 @@
 {
   "name": "csv-reduce",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Application for generating CSV data with subset of columns from a CSV file.",
   "main": "index.js",
   "scripts": {
